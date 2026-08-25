@@ -2,6 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { serviceGraphicsAmbient } from "@/app/components/ServiceGraphics";
+import ServiceBackgroundSetter from "@/app/components/ServiceBackgroundSetter";
 
 export default async function ServiceDetailPage({
   params,
@@ -25,11 +26,12 @@ export default async function ServiceDetailPage({
 
   return (
     <main className="relative overflow-hidden">
+        <ServiceBackgroundSetter slug={service.slug} />
       {/* Halo de couleur, plein écran, pas de bordure */}
       <div
         className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-br ${ambient.glow} blur-3xl -z-20 pointer-events-none`}
       />
-      <div className="absolute left-16 top-4 w-[440px] h-[440px] text-slate-900/[0.13] -z-10 pointer-events-none animate-float-slow">
+      <div className="absolute left-16 top-4 w-[440px] h-[440px] text-slate-900/[0.30] -z-10 pointer-events-none animate-float-slow">
         {ambient.icon}
       </div>
 

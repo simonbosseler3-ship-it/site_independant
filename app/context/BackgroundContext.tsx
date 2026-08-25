@@ -5,12 +5,14 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 type BackgroundContextType = {
   activeBg: string;
   registerTrigger: (id: string, el: HTMLElement | null) => void;
+  setOverrideBg: (id: string | null) => void;
 };
 
 const BackgroundContext = createContext<BackgroundContextType | null>(null);
 
 export function BackgroundProvider({ children }: { children: React.ReactNode }) {
-  const [activeBg, setActiveBg] = useState("hero");
+  const [scrollBg, setScrollBg] = useState("hero");
+  const [overrideBg, setOverrideBg] = useState<string | null>(null);
   const triggersRef = useRef<Map<string, HTMLElement>>(new Map());
   const orderRef = useRef<string[]>([]);
   const tickingRef = useRef(false);
@@ -43,7 +45,7 @@ export function BackgroundProvider({ children }: { children: React.ReactNode }) 
       });
 
       if (current) {
-        setActiveBg((prev) => (prev === current ? prev : current));
+        setScrollBg((prev) => (prev === current ? prev : current));
       }
     };
 
@@ -63,8 +65,11 @@ export function BackgroundProvider({ children }: { children: React.ReactNode }) 
     };
   }, []);
 
+  // Un override actif (page service) prend toujours le dessus sur le scroll de la home
+  const activeBg = overrideBg ?? scrollBg;
+
   return (
-    <BackgroundContext.Provider value={{ activeBg, registerTrigger }}>
+    <BackgroundContext.Provider value={{ activeBg, registerTrigger, setOverrideBg }}>
       {children}
     </BackgroundContext.Provider>
   );

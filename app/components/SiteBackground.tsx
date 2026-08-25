@@ -3,12 +3,22 @@
 import Image from "next/image";
 import { useBackground } from "@/app/context/BackgroundContext";
 
-const backgrounds: Record<string, string> = {
+const sectionBackgrounds: Record<string, string> = {
   hero: "/images/workspace.jpg",
   services: "/images/workspace2.jpg",
   process: "/images/workspace3.jpg",
   cta: "/images/workspace4.jpg",
 };
+
+const serviceBackgrounds: Record<string, string> = {
+  "vitrine": "/images/vitrine.jpg",
+  "refonte": "/images/refonte.jpg",
+  "maintenance": "/images/maintenance.jpg",
+  "landing_page": "/images/landing_page.jpg",
+  "e_commerce":"/images/e_commerce.jpg"
+};
+
+const backgrounds: Record<string, string> = { ...sectionBackgrounds, ...serviceBackgrounds };
 
 export default function SiteBackground() {
   const { activeBg } = useBackground();
@@ -34,7 +44,7 @@ export default function SiteBackground() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(237,233,254,0.70) 0%, rgba(245,243,255,0.60) 22%, rgba(238,242,255,0.40) 45%, rgba(250,245,255,0.20) 68%, rgba(248,250,252,0.10) 100%)",
+            "linear-gradient(135deg, rgba(237,233,254,0.60) 0%, rgba(245,243,255,0.50) 22%, rgba(238,242,255,0.40) 45%, rgba(250,245,255,0.20) 68%, rgba(248,250,252,0.10) 100%)",
         }}
       />
 
