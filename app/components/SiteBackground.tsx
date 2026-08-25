@@ -8,6 +8,8 @@ const sectionBackgrounds: Record<string, string> = {
   services: "/images/workspace2.jpg",
   process: "/images/workspace3.jpg",
   cta: "/images/workspace4.jpg",
+  profile: "/images/profil.jpg",
+  devis: "/images/devis.jpg"
 };
 
 const serviceBackgrounds: Record<string, string> = {
