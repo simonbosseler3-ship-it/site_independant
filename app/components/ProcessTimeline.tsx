@@ -1,11 +1,19 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { MessageCircle, Palette, Code2, Rocket, type LucideIcon } from "lucide-react";
 
 type Step = {
   step_number: string;
   title: string;
   description: string;
+};
+
+const stepIcons: Record<string, LucideIcon> = {
+  "01": MessageCircle,
+  "02": Palette,
+  "03": Code2,
+  "04": Rocket,
 };
 
 export default function ProcessTimeline({ steps }: { steps: Step[] }) {
@@ -16,8 +24,6 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
     const el = containerRef.current;
     if (!el) return;
 
-    // Vérification immédiate : si l'élément est déjà visible au chargement,
-    // pas besoin d'attendre l'observer (évite toute dépendance à un timing fragile).
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
       setIsVisible(true);
@@ -55,6 +61,7 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
       <div className="space-y-8 sm:space-y-12 relative z-10">
         {steps.map((step, index) => {
           const isEven = index % 2 === 0;
+          const Icon = stepIcons[step.step_number] ?? MessageCircle;
 
           return (
             <div
@@ -63,11 +70,11 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
             >
               <div
                 style={{ transitionDelay: `${150 + index * 100}ms` }}
-                className={`absolute left-0 sm:left-1/2 sm:-translate-x-1/2 top-0 sm:top-1/2 sm:-translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white border-2 border-violet-600 flex items-center justify-center font-extrabold text-violet-600 shadow-sm transition-all duration-500 ease-out ${
+                className={`absolute left-0 sm:left-1/2 sm:-translate-x-1/2 top-0 sm:top-1/2 sm:-translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white border-2 border-violet-600 flex items-center justify-center text-violet-600 shadow-sm transition-all duration-500 ease-out ${
                   isVisible ? "opacity-100 scale-100" : "opacity-0 scale-50"
                 }`}
               >
-                {step.step_number}
+                <Icon className="w-6 h-6" strokeWidth={2.2} />
               </div>
 
               <div

@@ -1,13 +1,20 @@
 import Link from "next/link";
 
 export default function Navbar() {
+  // Regrouper les liens pour un code propre (DRY) et modulaire
+  const navLinks = [
+    { label: "Accueil", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: "Mon Profil", href: "/a-propos" },
+    { label: "Contact", href: "/contact" },
+  ];
+
   return (
-    <header className="w-full border-b border-violet-200/60 bg-gradient-to-r from-violet-100/60 via-white/90 to-purple-100/60 backdrop-blur-md sticky top-0 z-50 shadow-sm shadow-violet-100/40">
+    <header className="w-full border-b border-violet-100/80 bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm shadow-violet-100/30">
       <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo complet avec icône PC animée */}
         <Link href="/" className="flex items-center gap-3.5 group">
-          
           <div className="relative flex items-center justify-center p-2.5 rounded-xl bg-slate-900 text-white transition-all duration-300 group-hover:bg-violet-600 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-violet-200">
             <svg
               className="w-7 h-7"
@@ -52,42 +59,40 @@ export default function Navbar() {
               Développement / Modernisation Site Web
             </span>
           </div>
-
         </Link>
 
-        {/* Navigation : Capsule centrale avec pilules interactives */}
-        <nav className="hidden md:flex items-center space-x-1 bg-white/70 backdrop-blur-sm p-1.5 rounded-full border border-violet-200/80 shadow-sm shadow-violet-100/50">
-          <Link
-            href="/"
-            className="px-4 py-2 rounded-full text-sm font-bold text-slate-700 hover:text-violet-700 hover:bg-violet-100/80 transition-all duration-200"
-          >
-            Accueil
-          </Link>
-          <Link
-            href="/services"
-            className="px-4 py-2 rounded-full text-sm font-bold text-slate-700 hover:text-violet-700 hover:bg-violet-100/80 transition-all duration-200"
-          >
-            Services
-          </Link>
-          <Link
-            href="/a-propos"
-            className="px-4 py-2 rounded-full text-sm font-bold text-slate-700 hover:text-violet-700 hover:bg-violet-100/80 transition-all duration-200"
-          >
-            Mon Profil
-          </Link>
-          <Link
-            href="/contact"
-            className="px-4 py-2 rounded-full text-sm font-bold text-slate-700 hover:text-violet-700 hover:bg-violet-100/80 transition-all duration-200"
-          >
-            Contact
-          </Link>
+        {/* Navigation avec effet "Rolling Text" et point d'accentuation */}
+        <nav className="hidden md:flex items-center space-x-1">
+          {navLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              className="group relative px-4 py-2 font-semibold text-sm rounded-full"
+            >
+              {/* Background subtil au hover */}
+              <div className="absolute inset-0 w-full h-full bg-violet-50/0 group-hover:bg-violet-50/80 transition-colors duration-300 rounded-full" />
+              
+              {/* Conteneur avec masque pour le texte déroulant */}
+              <div className="relative overflow-hidden inline-flex items-center justify-center">
+                <span className="text-slate-700 transition-transform duration-300 ease-out group-hover:-translate-y-full block">
+                  {link.label}
+                </span>
+                <span className="absolute inset-0 text-violet-600 transition-transform duration-300 ease-out translate-y-full group-hover:translate-y-0 flex items-center justify-center">
+                  {link.label}
+                </span>
+              </div>
+              
+              {/* Petit point indicateur en bas au survol */}
+              <span className="absolute bottom-1 left-1/2 w-1 h-1 bg-violet-600 rounded-full opacity-0 -translate-x-1/2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:-translate-y-1" />
+            </Link>
+          ))}
         </nav>
 
-        {/* Bouton Devis */}
+        {/* Bouton Devis avec dégradé */}
         <div>
           <Link
             href="/devis"
-            className="bg-violet-600 hover:bg-violet-700 text-white font-bold text-sm px-6 py-2.5 rounded-full transition-all shadow-md shadow-violet-200 hover:shadow-lg hover:shadow-violet-300 hover:-translate-y-0.5 active:translate-y-0"
+            className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-sm px-6 py-2.5 rounded-full transition-all shadow-md shadow-violet-500/20 hover:shadow-lg hover:shadow-violet-500/35 hover:-translate-y-0.5 active:translate-y-0 inline-block"
           >
             Faire un devis
           </Link>
