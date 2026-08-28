@@ -21,7 +21,7 @@ export default function DevisForm({
 
   if (state.success) {
     return (
-      <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-10 sm:p-14 shadow-sm text-center">
+      <div className="bg-white/70 border border-slate-200/80 rounded-3xl p-10 sm:p-14 shadow-sm text-center">
         <div className="w-14 h-14 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center mx-auto mb-6">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -36,7 +36,7 @@ export default function DevisForm({
   }
 
   return (
-    <form action={formAction} className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
+    <form action={formAction} className="bg-white/70 border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
       {/* Type de projet */}
       <div>
         <label htmlFor="project_type" className="block text-sm font-bold text-slate-900 mb-3">

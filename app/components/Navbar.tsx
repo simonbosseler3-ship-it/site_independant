@@ -1,12 +1,24 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Navbar() {
-  // Regrouper les liens pour un code propre (DRY) et modulaire
+export default async function Navbar() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  async function logout() {
+    "use server";
+    const supabase = await createClient();
+    await supabase.auth.signOut();
+    redirect("/");
+  }
+
   const navLinks = [
     { label: "Accueil", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Mon Profil", href: "/a-propos" },
     { label: "Contact", href: "/contact" },
+    ...(user ? [{ label: "Admin", href: "/admin/devis" }] : []),
   ];
 
   return (
@@ -88,8 +100,19 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Bouton Devis avec dégradé */}
-        <div>
+        {/* Boutons de droite : Déconnexion (admin uniquement) + Devis */}
+        <div className="flex items-center gap-3">
+          {user && (
+            <form action={logout}>
+              <button
+                type="submit"
+                className="text-sm font-semibold text-slate-500 hover:text-violet-600 px-4 py-2.5 rounded-full border border-slate-200 hover:border-violet-300 transition-colors"
+              >
+                Déconnexion
+              </button>
+            </form>
+          )}
+
           <Link
             href="/devis"
             className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-sm px-6 py-2.5 rounded-full transition-all shadow-md shadow-violet-500/20 hover:shadow-lg hover:shadow-violet-500/35 hover:-translate-y-0.5 active:translate-y-0 inline-block"
