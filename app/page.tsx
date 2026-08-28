@@ -36,14 +36,6 @@ export default async function Home() {
         <div> 
           <BackgroundTrigger id="hero" />
           <section className="flex flex-col items-center text-center pt-8 sm:pt-16 pb-4">
-            
-            {/* BADGE HAUT DE GAMME */}
-            <ScrollReveal>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 border border-violet-200/80 text-violet-800 text-xs font-bold tracking-wider uppercase mb-8 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-violet-600 animate-pulse" />
-                Développeur web indépendant
-              </div>
-            </ScrollReveal>
 
             {/* TITRE PRINCIPAL */}
             <ScrollReveal delay={100}>

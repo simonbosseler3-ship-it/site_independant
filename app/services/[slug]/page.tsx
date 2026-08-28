@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { serviceGraphicsAmbient } from "@/app/components/ServiceGraphics";
 import ServiceBackgroundSetter from "@/app/components/ServiceBackgroundSetter";
+import { formatServicePrice } from "@/lib/formatPrice";
 
 export default async function ServiceDetailPage({
   params,
@@ -13,7 +14,7 @@ export default async function ServiceDetailPage({
 
   const { data: service } = await supabase
     .from("services")
-    .select("slug, title, full_description, points")
+    .select("slug, title, full_description, points, starting_price, price_period, note")
     .eq("slug", slug)
     .single();
 
@@ -24,10 +25,11 @@ export default async function ServiceDetailPage({
     icon: null,
   };
 
+  const priceLabel = formatServicePrice(service.starting_price, service.price_period, "long");
+
   return (
     <main className="relative overflow-hidden">
-        <ServiceBackgroundSetter slug={service.slug} />
-      {/* Halo de couleur, plein écran, pas de bordure */}
+      <ServiceBackgroundSetter slug={service.slug} />
       <div
         className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-br ${ambient.glow} blur-3xl -z-20 pointer-events-none`}
       />
@@ -43,9 +45,17 @@ export default async function ServiceDetailPage({
           ← Tous les services
         </Link>
 
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
-          {service.title}
-        </h1>
+        <div className="flex flex-wrap items-center gap-4">
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+            {service.title}
+          </h1>
+          {priceLabel && (
+            <span className="text-sm font-bold text-violet-700 bg-violet-100 px-4 py-2 rounded-full whitespace-nowrap">
+              {priceLabel}
+            </span>
+          )}
+        </div>
+
         <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-2xl">
           {service.full_description}
         </p>
@@ -63,6 +73,15 @@ export default async function ServiceDetailPage({
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {service.note && (
+          <div className="mt-6 flex items-start gap-3 bg-amber-50 border border-amber-200/80 rounded-2xl p-6">
+            <svg className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+            </svg>
+            <p className="text-sm text-amber-800 leading-relaxed">{service.note}</p>
           </div>
         )}
 

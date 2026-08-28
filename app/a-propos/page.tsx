@@ -1,54 +1,26 @@
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 import BackgroundTrigger from "@/app/components/BackgroundTrigger";
 import ScrollReveal from "@/app/components/ScrollReveal";
 
-const skills = [
-  {
-    category: "Développement web",
-    items: ["React / Next.js", "TypeScript", "Tailwind CSS", "Supabase / PostgreSQL"],
-  },
-  {
-    category: "Fondations informatiques",
-    items: ["Algorithmes & structures de données", "Bases de données", "Réseaux", "Intelligence artificielle"],
-  },
-  {
-    category: "Méthode de travail",
-    items: ["Cahier des charges clair", "Communication régulière", "Code propre & documenté", "Délais respectés"],
-  },
-];
+export default async function AproposPage() {
+  // Récupération dynamique depuis Supabase
+  const { data: timeline } = await supabase
+    .from("about_timeline")
+    .select("year, title, description")
+    .order("display_order");
 
-const timeline = [
-  {
-    year: "Avant",
-    title: "Diplôme en informatique",
-    desc: "Formation complète couvrant la programmation, les algorithmes et les fondations théoriques de l'informatique.",
-  },
-  {
-    year: "Aujourd'hui",
-    title: "Master à l'UCLouvain",
-    desc: "Approfondissement en algorithmique, bases de données, réseaux, compilation, intelligence artificielle et calculabilité.",
-  },
-  {
-    year: "En parallèle",
-    title: "Lancement de mon activité indépendante",
-    desc: "Je mets mes compétences au service de clients qui ont besoin d'un site web moderne, fiable et pensé pour leurs objectifs.",
-  },
-];
+  const { data: skills } = await supabase
+    .from("about_skills")
+    .select("category, items")
+    .order("display_order");
 
-export default function AproposPage() {
   return (
     <main className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
       <BackgroundTrigger id="profile" />
 
       {/* Hero */}
       <section className="flex flex-col items-center text-center">
-        <ScrollReveal>
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200 text-violet-700 text-xs font-bold tracking-wide uppercase mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-600" />
-            Mon profil
-          </span>
-        </ScrollReveal>
-
         <ScrollReveal delay={100}>
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 max-w-2xl leading-[1.15]">
             Simon Bosseler,{" "}
@@ -88,14 +60,14 @@ export default function AproposPage() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {timeline.map((step, i) => (
+          {timeline?.map((step, i) => (
             <ScrollReveal key={step.title} delay={i * 100}>
               <div className="h-full bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm">
                 <span className="inline-block text-xs font-bold text-violet-600 tracking-wide uppercase mb-3">
                   {step.year}
                 </span>
                 <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
-                <p className="mt-3 text-slate-600 text-sm leading-relaxed">{step.desc}</p>
+                <p className="mt-3 text-slate-600 text-sm leading-relaxed">{step.description}</p>
               </div>
             </ScrollReveal>
           ))}
@@ -117,12 +89,12 @@ export default function AproposPage() {
         </ScrollReveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {skills.map((group, i) => (
+          {skills?.map((group, i) => (
             <ScrollReveal key={group.category} delay={i * 100}>
               <div className="h-full bg-white border border-slate-200/80 rounded-3xl p-8 shadow-sm">
                 <h3 className="text-base font-bold text-slate-900 mb-4">{group.category}</h3>
                 <ul className="space-y-2.5">
-                  {group.items.map((item) => (
+                  {group.items.map((item: string) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm text-slate-600">
                       <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-violet-600 shrink-0" />
                       {item}
