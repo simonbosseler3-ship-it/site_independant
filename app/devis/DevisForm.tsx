@@ -21,7 +21,7 @@ export default function DevisForm({
 
   if (state.success) {
     return (
-      <div className="bg-white border border-slate-200/80 rounded-3xl p-10 sm:p-14 shadow-sm text-center">
+      <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-10 sm:p-14 shadow-sm text-center">
         <div className="w-14 h-14 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center mx-auto mb-6">
           <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
@@ -36,7 +36,7 @@ export default function DevisForm({
   }
 
   return (
-    <form action={formAction} className="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
+    <form action={formAction} className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm space-y-8">
       {/* Type de projet */}
       <div>
         <label htmlFor="project_type" className="block text-sm font-bold text-slate-900 mb-3">
@@ -47,7 +47,7 @@ export default function DevisForm({
           name="project_type"
           required
           defaultValue={defaultType ?? ""}
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         >
           <option value="" disabled>
             Choisissez un type de projet
@@ -72,7 +72,7 @@ export default function DevisForm({
           required
           rows={5}
           placeholder="Parlez-moi de votre activité, de ce que vous souhaitez pour votre site, de vos inspirations éventuelles..."
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-none"
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-none"
         />
       </div>
 
@@ -83,7 +83,7 @@ export default function DevisForm({
           {budgetOptions.map((opt) => (
             <label
               key={opt}
-              className="cursor-pointer px-4 py-2 rounded-full border border-slate-200 text-sm text-slate-600 has-[:checked]:bg-violet-600 has-[:checked]:text-white has-[:checked]:border-violet-600 transition-colors"
+              className="cursor-pointer px-4 py-2 rounded-full border border-slate-200 text-sm text-slate-600 bg-white/60 hover:bg-white has-[:checked]:bg-violet-600 has-[:checked]:text-white has-[:checked]:border-violet-600 transition-colors"
             >
               <input type="radio" name="budget_range" value={opt} className="hidden" />
               {opt}
@@ -99,7 +99,7 @@ export default function DevisForm({
           {timelineOptions.map((opt) => (
             <label
               key={opt}
-              className="cursor-pointer px-4 py-2 rounded-full border border-slate-200 text-sm text-slate-600 has-[:checked]:bg-violet-600 has-[:checked]:text-white has-[:checked]:border-violet-600 transition-colors"
+              className="cursor-pointer px-4 py-2 rounded-full border border-slate-200 text-sm text-slate-600 bg-white/60 hover:bg-white has-[:checked]:bg-violet-600 has-[:checked]:text-white has-[:checked]:border-violet-600 transition-colors"
             >
               <input type="radio" name="timeline" value={opt} className="hidden" />
               {opt}
@@ -119,7 +119,7 @@ export default function DevisForm({
             name="name"
             type="text"
             required
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </div>
         <div>
@@ -131,7 +131,7 @@ export default function DevisForm({
             name="email"
             type="email"
             required
-            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </div>
       </div>
@@ -144,7 +144,7 @@ export default function DevisForm({
           id="phone"
           name="phone"
           type="tel"
-          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         />
       </div>
 

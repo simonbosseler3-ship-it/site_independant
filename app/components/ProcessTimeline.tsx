@@ -68,6 +68,7 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
               key={step.step_number || index}
               className="relative flex flex-col sm:grid sm:grid-cols-2 sm:gap-12 items-center"
             >
+              {/* Icône sur la ligne centrale */}
               <div
                 style={{ transitionDelay: `${150 + index * 100}ms` }}
                 className={`absolute left-0 sm:left-1/2 sm:-translate-x-1/2 top-0 sm:top-1/2 sm:-translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white border-2 border-violet-600 flex items-center justify-center text-violet-600 shadow-sm transition-all duration-500 ease-out ${
@@ -77,6 +78,7 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
                 <Icon className="w-6 h-6" strokeWidth={2.2} />
               </div>
 
+              {/* Conteneur de la carte avec l'animation de slide */}
               <div
                 style={{ transitionDelay: `${100 + index * 100}ms` }}
                 className={`pl-20 sm:pl-0 w-full transition-all duration-500 ease-out ${
@@ -89,11 +91,24 @@ export default function ProcessTimeline({ steps }: { steps: Step[] }) {
                     : "opacity-0 translate-x-8"
                 }`}
               >
-                <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                  <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
-                  <p className="mt-2 text-slate-600 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
+                {/* NOUVEAU STYLE DE CARTE ICI 
+                  - "group" et "relative overflow-hidden" pour le halo
+                  - "bg-gradient-to-br" pour le fond coloré
+                  - Hover states sur la bordure et l'ombre
+                */}
+                <div className="group relative overflow-hidden bg-gradient-to-br from-white via-slate-50/80 to-violet-50/30 border border-slate-200/80 rounded-3xl p-6 shadow-sm hover:shadow-md hover:border-violet-200 transition-all duration-300">
+                  
+                  {/* Halo lumineux au survol en arrière-plan de la carte */}
+                  <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-violet-400/10 rounded-full blur-xl group-hover:bg-violet-500/20 transition-all pointer-events-none" />
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-violet-900 transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-slate-600 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

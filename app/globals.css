@@ -22,3 +22,15 @@ body {
 .animate-float-slow {
   animation: float-slow 14s ease-in-out infinite;
 }
+
+@theme {
+  --font-display: var(--font-display), sans-serif;
+  --font-body: var(--font-body), sans-serif;
+  --font-mono-jb: var(--font-mono-jb), monospace;
+
+  --color-violet-600: #6D5DD3;
+  --color-violet-700: #5B4B8A;
+  --color-indigo-600: #4C46A8;
+  --color-indigo-700: #3E3A8C;
+  --color-purple-600: #6B4FA0;
+}

@@ -11,14 +11,15 @@ export default function ServiceCard({ service }: { service: Service }) {
   return (
     <Link
       href={`/services/${service.slug}`}
-      className="group relative h-full p-8 sm:p-9 rounded-3xl bg-white border border-slate-200/80 hover:border-violet-300 transition-all duration-300 flex flex-col justify-between space-y-12 shadow-sm hover:shadow-2xl hover:shadow-violet-100 hover:-translate-y-1.5 overflow-hidden"
+      // C'est ici que la magie opère : bg-white/75 par défaut, hover:bg-white/95 au survol
+      className="group relative h-full p-8 sm:p-9 rounded-3xl bg-white/75 hover:bg-white/95 border border-white/60 hover:border-violet-300 transition-all duration-300 flex flex-col justify-between space-y-12 shadow-lg shadow-slate-200/20 hover:shadow-2xl hover:shadow-violet-200 hover:-translate-y-1.5 overflow-hidden"
     >
       {serviceGraphics[service.slug]}
       <div className="space-y-3 relative z-10">
-        <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 group-hover:text-violet-600 transition-colors">
+        <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-violet-600 transition-colors">
           {service.title}
         </h3>
-        <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+        <p className="font-body text-slate-600 text-sm sm:text-base leading-relaxed">
           {service.short_description}
         </p>
       </div>
