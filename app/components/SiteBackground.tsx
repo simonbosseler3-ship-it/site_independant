@@ -9,7 +9,8 @@ const sectionBackgrounds: Record<string, string> = {
   process: "/images/workspace3.jpg",
   cta: "/images/workspace4.jpg",
   profile: "/images/profil.jpg",
-  devis: "/images/devis.jpg"
+  devis: "/images/devis.jpg",
+  contact: "/images/contact.jpg" // <-- Ajout de l'image de contact ici
 };
 
 const serviceBackgrounds: Record<string, string> = {

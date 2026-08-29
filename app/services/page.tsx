@@ -49,7 +49,7 @@ export default async function ServicesPage() {
             >
               <Link
                 href={`/services/${service.slug}`}
-                className={`group relative overflow-hidden p-8 rounded-3xl bg-white border border-slate-200/80 hover:border-violet-300 transition-all shadow-sm hover:shadow-xl hover:shadow-violet-100 hover:-translate-y-1 block h-full w-full ${
+                className={`group relative overflow-hidden p-8 rounded-3xl bg-white/70 border border-slate-200/80 hover:bg-white hover:border-violet-300 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-violet-100 hover:-translate-y-1 block h-full w-full ${
                   isLastAndOdd ? "md:max-w-[calc(50%-0.75rem)]" : ""
                 }`}
               >
@@ -77,7 +77,7 @@ export default async function ServicesPage() {
 
       {hasRemarksBlock && (
         <ScrollReveal delay={(services?.length ?? 0) * 100}>
-          <div className="mt-16 bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 shadow-sm space-y-8">
+          <div className="mt-16 bg-white/70 border border-slate-200/80 rounded-3xl p-8 sm:p-10 shadow-sm space-y-8">
             {(introTitle || introText) && (
               <div className="space-y-3">
                 {introTitle && (

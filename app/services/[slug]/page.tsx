@@ -68,7 +68,9 @@ export default async function ServiceDetailPage({
             <ul className="space-y-4">
               {service.points.map((point: string, i: number) => (
                 <li key={i} className="font-body flex items-start gap-3 text-slate-700">
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-violet-600 shrink-0" />
+                  <svg className="w-5 h-5 text-violet-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
                   {point}
                 </li>
               ))}
