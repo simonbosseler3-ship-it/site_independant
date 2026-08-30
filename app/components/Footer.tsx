@@ -42,7 +42,7 @@ export default function Footer() {
               
               {/* Icône Facebook */}
               <a 
-                href="https://facebook.com/tonprofil" 
+                href="https://www.facebook.com/profile.php?id=100077993768306" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="group p-2.5 bg-white border border-slate-200 rounded-full shadow-sm hover:bg-violet-50 hover:border-violet-200 hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
@@ -55,7 +55,7 @@ export default function Footer() {
 
               {/* Icône Instagram */}
               <a 
-                href="https://instagram.com/tonprofil" 
+                href="https://www.instagram.com/simon_bosseler/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="group p-2.5 bg-white border border-slate-200 rounded-full shadow-sm hover:bg-violet-50 hover:border-violet-200 hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-out"
@@ -66,8 +66,6 @@ export default function Footer() {
                 </svg>
               </a>
               
-              {/* Bonus : J'ai ajouté un espace pour LinkedIn ou GitHub si tu en as un ! 
-                  Tu peux copier-coller un SVG similaire ici. */}
             </div>
           </div>
 
