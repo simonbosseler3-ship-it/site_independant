@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useBackground } from "@/app/context/BackgroundContext";
 
@@ -10,35 +11,75 @@ const sectionBackgrounds: Record<string, string> = {
   cta: "/images/workspace4.jpg",
   profile: "/images/profil.jpg",
   devis: "/images/devis.jpg",
-  contact: "/images/contact.jpg" // <-- Ajout de l'image de contact ici
+  contact: "/images/contact.jpg",
 };
 
 const serviceBackgrounds: Record<string, string> = {
-  "vitrine": "/images/vitrine.jpg",
-  "refonte": "/images/refonte.jpg",
-  "maintenance": "/images/maintenance.jpg",
-  "landing_page": "/images/landing_page.jpg",
-  "e_commerce":"/images/e_commerce.jpg"
+  vitrine: "/images/vitrine.jpg",
+  refonte: "/images/refonte.jpg",
+  maintenance: "/images/maintenance.jpg",
+  landing_page: "/images/landing_page.jpg",
+  e_commerce: "/images/e_commerce.jpg",
 };
 
 const backgrounds: Record<string, string> = { ...sectionBackgrounds, ...serviceBackgrounds };
 
+type Layer = { src: string; key: number; visible: boolean };
+
 export default function SiteBackground() {
   const { activeBg } = useBackground();
+  const currentSrc = backgrounds[activeBg] ?? backgrounds.hero;
+  const keyCounter = useRef(1);
+
+  const [layers, setLayers] = useState<Layer[]>([
+    { src: currentSrc, key: 0, visible: true },
+  ]);
+
+  // Ajoute une nouvelle couche (au-dessus) quand l'image change
+  useEffect(() => {
+    setLayers((prev) => {
+      if (prev[prev.length - 1]?.src === currentSrc) return prev;
+      return [...prev, { src: currentSrc, key: keyCounter.current++, visible: false }];
+    });
+  }, [currentSrc]);
+
+  // Déclenche le fondu d'entrée de la nouvelle couche juste après son montage
+  useEffect(() => {
+    const last = layers[layers.length - 1];
+    if (last && !last.visible) {
+      const t = setTimeout(() => {
+        setLayers((prev) =>
+          prev.map((l) => (l.key === last.key ? { ...l, visible: true } : l))
+        );
+      }, 30);
+      return () => clearTimeout(t);
+    }
+  }, [layers]);
+
+  // Une fois le fondu terminé, retire les anciennes couches (n'en garde qu'une)
+  useEffect(() => {
+    if (layers.length > 1) {
+      const t = setTimeout(() => {
+        setLayers((prev) => prev.slice(-1));
+      }, 1300);
+      return () => clearTimeout(t);
+    }
+  }, [layers]);
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-      {/* Une couche par image, superposées, fondu géré par transition d'opacité */}
-      {Object.entries(backgrounds).map(([key, src]) => (
+      {/* Seule l'image active (+ la précédente pendant le fondu) est montée */}
+      {layers.map((layer) => (
         <Image
-          key={key}
-          src={src}
+          key={layer.key}
+          src={layer.src}
           alt=""
           fill
-          quality={90}
-          className="object-cover transition-opacity duration-[1200ms] ease-in-out"
-          style={{ opacity: activeBg === key ? 0.80 : 0 }}
-          priority={key === "hero"}
+          quality={75}
+          sizes="100vw"
+          className="absolute inset-0 object-cover transition-opacity duration-[1200ms] ease-in-out"
+          style={{ opacity: layer.visible ? 0.8 : 0 }}
+          priority={layer.key === 0}
         />
       ))}
 
