@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabaseClient";
 import BackgroundTrigger from "@/app/components/BackgroundTrigger";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import DevisForm from "./DevisForm";
