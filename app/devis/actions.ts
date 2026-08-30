@@ -9,7 +9,7 @@ export type DevisFormState = {
 };
 
 const ADMIN_EMAIL = "simonbosseler3@gmail.com";
-const FROM_EMAIL = "onboarding@resend.dev"; // ← à remplacer par une adresse @ton-domaine.com une fois vérifié
+const FROM_EMAIL = "simonbosseler.be";
 
 export async function submitDevis(
   _prevState: DevisFormState,
