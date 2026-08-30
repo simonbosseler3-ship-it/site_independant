@@ -30,12 +30,31 @@ export default function SiteBackground() {
   const { activeBg } = useBackground();
   const currentSrc = backgrounds[activeBg] ?? backgrounds.hero;
   const keyCounter = useRef(1);
+  const preloadedRef = useRef(false);
 
   const [layers, setLayers] = useState<Layer[]>([
     { src: currentSrc, key: 0, visible: true },
   ]);
 
-  // Ajoute une nouvelle couche (au-dessus) quand l'image change
+  // Précharge tous les fichiers en tâche de fond (juste les octets, rien de monté dans le DOM)
+  useEffect(() => {
+    if (preloadedRef.current) return;
+    preloadedRef.current = true;
+
+    const timer = setTimeout(() => {
+      Object.values(backgrounds).forEach((src) => {
+        const img = new window.Image();
+        if ("fetchPriority" in img) {
+          // @ts-expect-error - propriété récente, pas encore dans tous les types TS
+          img.fetchPriority = "low";
+        }
+        img.src = src;
+      });
+    }, 1500); // attend un peu que le hero ait fini de s'afficher avant de précharger le reste
+
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     setLayers((prev) => {
       if (prev[prev.length - 1]?.src === currentSrc) return prev;
@@ -43,7 +62,6 @@ export default function SiteBackground() {
     });
   }, [currentSrc]);
 
-  // Déclenche le fondu d'entrée de la nouvelle couche juste après son montage
   useEffect(() => {
     const last = layers[layers.length - 1];
     if (last && !last.visible) {
@@ -56,7 +74,6 @@ export default function SiteBackground() {
     }
   }, [layers]);
 
-  // Une fois le fondu terminé, retire les anciennes couches (n'en garde qu'une)
   useEffect(() => {
     if (layers.length > 1) {
       const t = setTimeout(() => {
@@ -68,7 +85,6 @@ export default function SiteBackground() {
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-      {/* Seule l'image active (+ la précédente pendant le fondu) est montée */}
       {layers.map((layer) => (
         <Image
           key={layer.key}
@@ -83,7 +99,6 @@ export default function SiteBackground() {
         />
       ))}
 
-      {/* Voile clair dégradé, dans les teintes du site — garantit la lisibilité partout */}
       <div
         className="absolute inset-0"
         style={{
@@ -92,7 +107,6 @@ export default function SiteBackground() {
         }}
       />
 
-      {/* Texture de points, identité "code" */}
       <div
         className="absolute inset-0 opacity-60"
         style={{
@@ -102,17 +116,14 @@ export default function SiteBackground() {
         }}
       />
 
-      {/* Halos de couleur */}
       <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-violet-400/35 via-purple-300/20 to-transparent blur-[100px]" />
       <div className="absolute top-10 right-[-200px] w-[750px] h-[750px] rounded-full bg-gradient-to-bl from-indigo-400/30 via-blue-300/15 to-transparent blur-[100px]" />
       <div className="absolute bottom-[-250px] left-1/3 w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-fuchsia-300/25 via-violet-200/15 to-transparent blur-[100px]" />
 
-      {/* Motif "lignes de vitesse" du logo */}
       <svg className="absolute -bottom-16 -right-16 w-[560px] h-[560px] text-indigo-900/[0.06]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M92 8 L30 92 M92 26 L48 92 M92 44 L66 92" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
       </svg>
 
-      {/* Accent "chevrons de code" */}
       <svg className="absolute top-20 -right-6 w-72 h-72 text-indigo-900/[0.05]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M35 20 L10 50 L35 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M65 20 L90 50 L65 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
