@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useBackground } from "@/app/context/BackgroundContext";
+import { useState, useEffect } from "react";
 
 const sectionBackgrounds: Record<string, string> = {
   hero: "/images/workspace.jpg",
@@ -10,7 +11,7 @@ const sectionBackgrounds: Record<string, string> = {
   cta: "/images/workspace4.jpg",
   profile: "/images/profil.jpg",
   devis: "/images/devis.jpg",
-  contact: "/images/contact.jpg" // <-- Ajout de l'image de contact ici
+  contact: "/images/contact.jpg"
 };
 
 const serviceBackgrounds: Record<string, string> = {
@@ -25,24 +26,39 @@ const backgrounds: Record<string, string> = { ...sectionBackgrounds, ...serviceB
 
 export default function SiteBackground() {
   const { activeBg } = useBackground();
+  const [prevBg, setPrevBg] = useState(activeBg);
+
+  // Gère la présence de l'ancienne image le temps de la transition CSS (1200ms)
+  useEffect(() => {
+    if (activeBg !== prevBg) {
+      const timeout = setTimeout(() => setPrevBg(activeBg), 1200);
+      return () => clearTimeout(timeout);
+    }
+  }, [activeBg, prevBg]);
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-      {/* Une couche par image, superposées, fondu géré par transition d'opacité */}
-      {Object.entries(backgrounds).map(([key, src]) => (
-        <Image
-          key={key}
-          src={src}
-          alt=""
-          fill
-          quality={90}
-          className="object-cover transition-opacity duration-[1200ms] ease-in-out"
-          style={{ opacity: activeBg === key ? 0.80 : 0 }}
-          priority={key === "hero"}
-        />
-      ))}
+      
+      {Object.entries(backgrounds).map(([key, src]) => {
+        // OPTIMISATION VITALE : On détruit les images inactives du DOM
+        if (key !== activeBg && key !== prevBg) return null;
 
-      {/* Voile clair dégradé, dans les teintes du site — garantit la lisibilité partout */}
+        return (
+          <Image
+            key={key}
+            src={src}
+            alt=""
+            fill
+            sizes="100vw" // Essentiel pour optimiser le téléchargement mobile
+            quality={90}
+            className="object-cover transition-opacity duration-[1200ms] ease-in-out"
+            style={{ opacity: activeBg === key ? 0.80 : 0 }}
+            priority={key === "hero" || key === activeBg}
+          />
+        );
+      })}
+
+      {/* Voile clair dégradé */}
       <div
         className="absolute inset-0"
         style={{
@@ -51,7 +67,7 @@ export default function SiteBackground() {
         }}
       />
 
-      {/* Texture de points, identité "code" */}
+      {/* Texture de points */}
       <div
         className="absolute inset-0 opacity-60"
         style={{
@@ -61,10 +77,10 @@ export default function SiteBackground() {
         }}
       />
 
-      {/* Halos de couleur */}
-      <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-violet-400/35 via-purple-300/20 to-transparent blur-[100px]" />
-      <div className="absolute top-10 right-[-200px] w-[750px] h-[750px] rounded-full bg-gradient-to-bl from-indigo-400/30 via-blue-300/15 to-transparent blur-[100px]" />
-      <div className="absolute bottom-[-250px] left-1/3 w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-fuchsia-300/25 via-violet-200/15 to-transparent blur-[100px]" />
+      {/* Halos de couleur : Flou réduit sur mobile (blur-3xl) pour sauver le GPU */}
+      <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-violet-400/35 via-purple-300/20 to-transparent blur-3xl md:blur-[100px]" />
+      <div className="absolute top-10 right-[-200px] w-[750px] h-[750px] rounded-full bg-gradient-to-bl from-indigo-400/30 via-blue-300/15 to-transparent blur-3xl md:blur-[100px]" />
+      <div className="absolute bottom-[-250px] left-1/3 w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-fuchsia-300/25 via-violet-200/15 to-transparent blur-3xl md:blur-[100px]" />
 
       {/* Motif "lignes de vitesse" du logo */}
       <svg className="absolute -bottom-16 -right-16 w-[560px] h-[560px] text-indigo-900/[0.06]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
