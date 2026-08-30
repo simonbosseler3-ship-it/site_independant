@@ -43,13 +43,10 @@ export default function SiteBackground() {
 
     const timer = setTimeout(() => {
       Object.values(backgrounds).forEach((src) => {
-        const img = new window.Image();
-        if ("fetchPriority" in img) {
-          // @ts-expect-error - propriété récente, pas encore dans tous les types TS
-          img.fetchPriority = "low";
-        }
-        img.src = src;
-      });
+      const img = new window.Image();
+      img.fetchPriority = "low";
+      img.src = src;
+    });
     }, 1500); // attend un peu que le hero ait fini de s'afficher avant de précharger le reste
 
     return () => clearTimeout(timer);
