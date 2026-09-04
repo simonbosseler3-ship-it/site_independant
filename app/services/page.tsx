@@ -34,6 +34,11 @@ export default async function ServicesPage() {
         <p className="font-body mt-4 text-lg text-slate-600 max-w-xl">
           Découvre mes prestations en développement et modernisation web.
         </p>
+        <p className="font-body mt-3 text-sm text-slate-500 max-w-xl">
+          Ces tarifs sont des prix de départ. Le montant final dépend des
+          fonctionnalités demandées et est toujours confirmé via un devis
+          gratuit et sans engagement.
+        </p>
       </ScrollReveal>
 
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
