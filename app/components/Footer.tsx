@@ -23,7 +23,7 @@ export default function Footer() {
       <div className="container-site pt-16 sm:pt-20 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           <div className="space-y-5 lg:col-span-5">
-            <h4 className="font-display text-xl font-semibold text-fg">Simon Bosseler</h4>
+            <h2 className="font-display text-xl font-semibold text-fg">Simon Bosseler</h2>
             <div className="text-sm space-y-2.5 font-medium flex flex-col">
               <a href="mailto:simonbosseler3@gmail.com" className={linkClass}>
                 simonbosseler3@gmail.com
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-5 lg:col-span-4">
-            <h4 className="font-display text-xl font-semibold text-fg">Navigation</h4>
+            <h2 className="font-display text-xl font-semibold text-fg">Navigation</h2>
             <nav aria-label="Navigation du pied de page" className="flex flex-col gap-2.5 text-sm font-medium">
               <Link href="/devis" className={linkClass}>Demander un devis</Link>
               <Link href="/contact" className={linkClass}>Contact</Link>
@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-5 lg:col-span-3 lg:justify-self-end">
-            <h4 className="font-display text-xl font-semibold text-fg">Me retrouver</h4>
+            <h2 className="font-display text-xl font-semibold text-fg">Me retrouver</h2>
             <div className="flex gap-3">
               <a
                 href="https://www.facebook.com/profile.php?id=100077993768306"
