@@ -18,7 +18,7 @@ export default function ServiceCard({ service, index }: { service: Service; inde
 
       <div className="relative z-10 space-y-4">
         {index != null && (
-          <span className="block font-mono-jb text-xs text-fg-subtle" aria-hidden="true">
+          <span className="block font-label tabular-nums text-xs text-fg-subtle" aria-hidden="true">
             {String(index + 1).padStart(2, "0")}
           </span>
         )}

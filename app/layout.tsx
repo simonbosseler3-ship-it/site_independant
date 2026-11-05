@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Serif, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import SiteBackground from "@/app/components/SiteBackground";
@@ -32,21 +32,13 @@ const ibmPlexSans = IBM_Plex_Sans({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-jetbrains",
-  display: "swap",
-  preload: false,
-});
-
 export const metadata: Metadata = {
   title: "Simon Bosseler | Développement & Modernisation Web",
   description: "Création de sites web sur-mesure, modernisation et solutions web performantes.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0d0b14",
+  themeColor: "#211d37",
   colorScheme: "dark",
 };
 
@@ -60,7 +52,7 @@ export default function RootLayout({
       lang="fr"
       // Lenis ajoute ses classes (lenis, lenis-smooth) sur <html> côté client
       suppressHydrationWarning
-      className={`${bricolage.variable} ${instrument.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}
+      className={`${bricolage.variable} ${instrument.variable} ${ibmPlexSans.variable}`}
     >
       <body className="text-fg min-h-screen flex flex-col antialiased font-body">
         <a

@@ -46,7 +46,7 @@ export default function Hero() {
 
           <div className="relative">
             <p
-              className="animate-rise mb-6 sm:mb-8 inline-flex items-center gap-3 font-mono-jb text-[0.7rem] sm:text-xs uppercase tracking-[0.2em] text-fg-muted"
+              className="animate-rise mb-6 sm:mb-8 inline-flex items-center gap-3 font-label tabular-nums text-[0.7rem] sm:text-xs uppercase tracking-[0.2em] text-fg-muted"
               style={{ animationDelay: "0ms" }}
             >
               <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -104,7 +104,7 @@ export default function Hero() {
                 }`}
               >
                 <div className="flex items-baseline gap-3">
-                  <span className="font-mono-jb text-xs text-brand-glow" aria-hidden="true">
+                  <span className="font-label tabular-nums text-xs text-brand-glow" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h2 className="font-display text-base sm:text-lg font-semibold text-fg">{p.title}</h2>

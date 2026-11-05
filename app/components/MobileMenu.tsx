@@ -144,7 +144,7 @@ export default function MobileMenu({
                           active ? "text-fg" : "text-fg-muted hover:text-fg"
                         }`}
                       >
-                        <span className="font-mono-jb text-xs text-brand-glow tracking-widest" aria-hidden="true">
+                        <span className="font-label tabular-nums text-xs text-brand-glow tracking-widest" aria-hidden="true">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         {link.label}

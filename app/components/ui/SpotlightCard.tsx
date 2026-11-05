@@ -65,6 +65,15 @@ export default function SpotlightCard({
     </>
   );
 
+  // mailto:, tel:, liens externes : simple <a> (pas de routage Next)
+  if (href && /^(mailto:|tel:|https?:)/.test(href)) {
+    return (
+      <a href={href} onPointerMove={onMove} className={`block ${classes}`}>
+        {inner}
+      </a>
+    );
+  }
+
   return href ? (
     <Link href={href} onPointerMove={onMove} className={`block ${classes}`}>
       {inner}

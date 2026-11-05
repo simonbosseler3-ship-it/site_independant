@@ -28,7 +28,7 @@ export default function Footer() {
               <a href="mailto:simonbosseler3@gmail.com" className={linkClass}>
                 simonbosseler3@gmail.com
               </a>
-              <a href="tel:+32499625420" className={`${linkClass} font-mono-jb`}>
+              <a href="tel:+32499625420" className={`${linkClass} font-label tabular-nums`}>
                 +32 499 62 54 20
               </a>
               <p className="text-fg-subtle">Belgique</p>

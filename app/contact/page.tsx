@@ -1,93 +1,102 @@
 import BackgroundTrigger from "@/app/components/BackgroundTrigger";
 import ScrollReveal from "@/app/components/ScrollReveal";
-import Link from "next/link";
+import PageHeader from "@/app/components/ui/PageHeader";
+import SpotlightCard from "@/app/components/ui/SpotlightCard";
+import ButtonLink from "@/app/components/ui/Button";
+
+const channels = [
+  {
+    href: "mailto:simonbosseler3@gmail.com",
+    title: "Par Email",
+    text: "Pour des questions détaillées ou m'envoyer des documents.",
+    value: "simonbosseler3@gmail.com",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.8}
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      />
+    ),
+  },
+  {
+    href: "tel:+32499625420",
+    title: "Par Téléphone",
+    text: "Pour une urgence ou discuter de vive voix de votre idée.",
+    value: "+32 499 62 54 20",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.8}
+        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+      />
+    ),
+  },
+];
 
 export default function ContactPage() {
   return (
-    <main className="relative max-w-3xl mx-auto px-6 py-16 sm:py-24">
-      <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-violet-600/20 rounded-full blur-[100px] sm:blur-[120px]" />
-        <div className="absolute top-[30%] -right-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-indigo-600/15 rounded-full blur-[100px] sm:blur-[120px]" />
-        <div className="absolute -bottom-32 left-[10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-purple-600/20 rounded-full blur-[100px] sm:blur-[120px]" />
-      </div>
-
+    <main className="relative overflow-x-clip">
       <BackgroundTrigger id="contact" />
 
-      {/* EN-TÊTE */}
-      <section className="flex flex-col items-center text-center mb-16">
-        <ScrollReveal delay={100}>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
-            Contact{" "}
-            <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              Direct
-            </span>
-          </h1>
-        </ScrollReveal>
-
-        <ScrollReveal delay={200}>
-          <div className="mt-6 max-w-xl mx-auto relative">
-            <div className="absolute inset-0 bg-white/70 blur-xl rounded-2xl -z-10" />
-            <p className="text-slate-700 text-lg font-medium leading-relaxed px-4 py-2">
-              Une question, un conseil ou un problème technique ? N&apos;hésitez pas à me joindre directement par le moyen qui vous convient le mieux.
+      <div className="container-site max-w-5xl">
+        <PageHeader
+          align="center"
+          title={
+            <>
+              Contact <span className="accent-serif text-gradient-brand">Direct</span>
+            </>
+          }
+          description={
+            <p>
+              Une question, un conseil ou un problème technique ? N&apos;hésitez pas à me joindre directement par le
+              moyen qui vous convient le mieux.
             </p>
+          }
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          {channels.map((c, i) => (
+            <ScrollReveal key={c.href} delay={150 + i * 100}>
+              <SpotlightCard href={c.href} className="h-full p-8 sm:p-10 flex flex-col">
+                <div className="flex items-center justify-between">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-glow/30 bg-brand/15 text-brand-glow transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:bg-brand group-hover:border-brand group-hover:text-white">
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      {c.icon}
+                    </svg>
+                  </span>
+                  <svg
+                    className="w-5 h-5 text-fg-subtle transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-brand-glow group-hover:translate-x-1 group-hover:-translate-y-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M9 7h8v8" />
+                  </svg>
+                </div>
+
+                <h2 className="mt-8 font-display text-2xl font-semibold text-fg">{c.title}</h2>
+                <p className="mt-2 flex-grow text-sm sm:text-base leading-relaxed text-fg-muted">{c.text}</p>
+                <span className="mt-8 [overflow-wrap:anywhere] font-display text-xl sm:text-2xl font-medium text-brand-glow transition-colors group-hover:text-white">
+                  {c.value}
+                </span>
+              </SpotlightCard>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <ScrollReveal delay={300}>
+          <div className="mt-16 sm:mt-20 flex flex-col items-center gap-5 text-center">
+            <p className="text-fg-muted">Vous avez déjà une idée précise et souhaitez une estimation ?</p>
+            <ButtonLink href="/devis" variant="secondary" arrow>
+              Faire une demande de devis
+            </ButtonLink>
           </div>
         </ScrollReveal>
-      </section>
-
-      {/* GRILLE DE CONTACT */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* Email */}
-        <ScrollReveal delay={300}>
-          <a
-            href="mailto:hello@votre-domaine.fr"
-            className="group flex flex-col items-center text-center bg-white/70 border border-slate-200/80 rounded-3xl p-8 hover:bg-white hover:border-violet-300 transition-all duration-300 shadow-sm hover:shadow-md h-full"
-          >
-            <div className="w-14 h-14 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">Par Email</h2>
-            <p className="text-slate-600 text-sm mb-4 flex-grow">
-              Pour des questions détaillées ou m&apos;envoyer des documents.
-            </p>
-            <span className="text-violet-600 font-medium">simonbosseler3@gmail.com</span>
-          </a>
-        </ScrollReveal>
-
-        {/* Téléphone */}
-        <ScrollReveal delay={400}>
-          <a
-            href="tel:+33600000000"
-            className="group flex flex-col items-center text-center bg-white/70 border border-slate-200/80 rounded-3xl p-8 hover:bg-white hover:border-violet-300 transition-all duration-300 shadow-sm hover:shadow-md h-full"
-          >
-            <div className="w-14 h-14 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300">
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-            </div>
-            <h2 className="text-xl font-bold text-slate-900 mb-2">Par Téléphone</h2>
-            <p className="text-slate-600 text-sm mb-4 flex-grow">
-              Pour une urgence ou discuter de vive voix de votre idée.
-            </p>
-            <span className="text-violet-600 font-medium">+32 499 62 54 20</span>
-          </a>
-        </ScrollReveal>
       </div>
-
-      <ScrollReveal delay={600}>
-        <div className="mt-12 text-center">
-          <p className="text-slate-600 text-sm mb-4">
-            Vous avez déjà une idée précise et souhaitez une estimation ?
-          </p>
-          <Link
-            href="/devis"
-            className="inline-flex items-center justify-center px-6 py-3 border border-slate-200 hover:border-violet-300 text-sm font-semibold rounded-full text-slate-700 hover:text-violet-700 bg-white hover:bg-violet-50 transition-all shadow-sm"
-          >
-            Faire une demande de devis
-          </Link>
-        </div>
-      </ScrollReveal>
     </main>
   );
 }

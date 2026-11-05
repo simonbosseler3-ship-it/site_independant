@@ -70,7 +70,7 @@ export default async function ServicesPage() {
                       {service.title}
                     </h2>
                     {priceLabel && (
-                      <span className="font-mono-jb shrink-0 rounded-full border border-brand-glow/30 bg-brand/15 px-3 py-1.5 text-xs font-medium text-brand-glow whitespace-nowrap">
+                      <span className="font-label tabular-nums shrink-0 rounded-full border border-brand-glow/30 bg-brand/15 px-3 py-1.5 text-xs font-medium text-brand-glow whitespace-nowrap">
                         {priceLabel}
                       </span>
                     )}
@@ -132,7 +132,7 @@ export default async function ServicesPage() {
                   <ul className="mt-5 space-y-4">
                     {remarques.map((remarque, i) => (
                       <li key={i} className="flex gap-4 items-start">
-                        <span className="mt-0.5 font-mono-jb text-xs text-brand-glow" aria-hidden="true">
+                        <span className="mt-0.5 font-label tabular-nums text-xs text-brand-glow" aria-hidden="true">
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <p className="text-sm sm:text-base leading-relaxed text-fg-muted">{remarque}</p>

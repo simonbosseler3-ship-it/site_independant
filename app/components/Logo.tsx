@@ -29,7 +29,7 @@ export default function Logo({ onClick }: { onClick?: () => void }) {
         <span className="font-display text-base sm:text-lg font-bold tracking-[0.04em] text-fg leading-none whitespace-nowrap">
           SIMON <span className="text-brand-glow">BOSSELER</span>
         </span>
-        <span className="font-mono-jb text-[7px] sm:text-[8.5px] tracking-[0.16em] text-fg-subtle uppercase mt-1.5">
+        <span className="font-label tabular-nums text-[7px] sm:text-[8.5px] tracking-[0.16em] text-fg-subtle uppercase mt-1.5">
           Développement / Modernisation Site Web
         </span>
       </div>

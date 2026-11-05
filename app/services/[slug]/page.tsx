@@ -38,7 +38,7 @@ export default async function ServiceDetailPage({
         aria-hidden="true"
       />
       {priceLabel && (
-        <p className="relative font-mono-jb text-2xl sm:text-3xl font-medium text-fg">{priceLabel}</p>
+        <p className="relative font-label tabular-nums text-2xl sm:text-3xl font-medium text-fg">{priceLabel}</p>
       )}
       <ButtonLink
         href={`/devis?type=${service.slug}`}
@@ -90,7 +90,7 @@ export default async function ServiceDetailPage({
 
             {priceLabel && (
               <span
-                className="animate-rise mt-6 inline-block font-mono-jb text-sm font-medium text-brand-glow border border-brand-glow/30 bg-brand/15 px-4 py-2 rounded-full whitespace-nowrap lg:hidden"
+                className="animate-rise mt-6 inline-block font-label tabular-nums text-sm font-medium text-brand-glow border border-brand-glow/30 bg-brand/15 px-4 py-2 rounded-full whitespace-nowrap lg:hidden"
                 style={{ animationDelay: "120ms" }}
               >
                 {priceLabel}
@@ -107,7 +107,7 @@ export default async function ServiceDetailPage({
             {service.points && service.points.length > 0 && (
               <ScrollReveal className="mt-14">
                 <div className="rounded-3xl border border-paper/[0.14] bg-ink-2/80 backdrop-blur-xl p-7 sm:p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                  <h2 className="font-mono-jb text-xs font-medium uppercase tracking-[0.18em] text-brand-glow mb-7">
+                  <h2 className="font-label tabular-nums text-xs font-medium uppercase tracking-[0.18em] text-brand-glow mb-7">
                     Ce qui est inclus
                   </h2>
                   <ul className="divide-y divide-line">

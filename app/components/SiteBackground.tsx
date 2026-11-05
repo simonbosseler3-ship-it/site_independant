@@ -86,36 +86,27 @@ export default function SiteBackground() {
           onLoad={() => handleLoad(key)}
           className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity]"
           style={{
-            opacity: shown === key ? 0.5 : 0,
+            opacity: shown === key ? "var(--photo-opacity)" : 0,
             transform: shown === key ? "scale(1)" : "scale(1.06)",
           }}
         />
       ))}
 
-      {/* Voile sombre : lisibilité du texte garantie quelle que soit la photo */}
+      {/* Voile teinté (couleur et densité pilotées par le thème) : lisibilité garantie quelle que soit la photo */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(13,11,20,0.55) 0%, rgba(13,11,20,0.72) 45%, rgba(13,11,20,0.92) 100%)",
+            "linear-gradient(180deg, rgb(var(--overlay-rgb) / var(--overlay-a)) 0%, rgb(var(--overlay-rgb) / var(--overlay-b)) 45%, rgb(var(--overlay-rgb) / var(--overlay-c)) 100%)",
         }}
       />
 
-      {/* Halo violet principal (dégradé radial, pas de filtre blur : léger pour le GPU mobile) */}
+      {/* Halos de couleur (dégradés radiaux, pas de filtre blur : léger pour le GPU mobile) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(60% 50% at 15% 0%, rgba(109,93,211,0.28) 0%, transparent 70%), radial-gradient(50% 45% at 95% 30%, rgba(76,70,168,0.22) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Trame de points, identité « code » */}
-      <div
-        className="absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(245,244,240,0.09) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+            "radial-gradient(60% 50% at 15% 0%, rgb(var(--glow-1) / var(--glow-strength)) 0%, transparent 70%), radial-gradient(50% 45% at 95% 30%, rgb(var(--glow-2) / var(--glow-strength)) 0%, transparent 70%)",
         }}
       />
 

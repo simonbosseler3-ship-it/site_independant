@@ -2,7 +2,7 @@
 
 /* ==========================================================================
    DESIGN TOKENS
-   Sombre immersif : fond "ink", texte "paper", violet signature.
+   Thème « Crépuscule » : fond violet-gris profond ("ink"), texte "paper", violet signature.
    ========================================================================== */
 
 @theme {
@@ -10,25 +10,26 @@
   --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-body: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
-  --font-mono-jb: var(--font-jetbrains), ui-monospace, monospace;
+  /* Libellés (sur-titres, prix, numéros) : police du texte, en capitales espacées */
+  --font-label: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
 
   /* Surfaces */
-  --color-ink: #0d0b14;
-  --color-ink-2: #14111f;
-  --color-ink-3: #1c1830;
+  --color-ink: #211d37;
+  --color-ink-2: #2c2747;
+  --color-ink-3: #37315a;
   --color-paper: #f5f4f0;
-  --color-line: rgb(245 244 240 / 0.1);
-  --color-line-strong: rgb(245 244 240 / 0.18);
+  --color-line: rgb(245 244 240 / 0.14);
+  --color-line-strong: rgb(245 244 240 / 0.24);
 
-  /* Texte sur fond sombre (contraste AA vérifié sur #0d0b14) */
+  /* Texte (contrastes mesurés sur #211d37) */
   --color-fg: #f5f4f0;
-  --color-fg-muted: #b9b6c8; /* ~10:1 */
-  --color-fg-subtle: #8c88a0; /* ~5.6:1 */
+  --color-fg-muted: #d0cce2; /* ~10:1 */
+  --color-fg-subtle: #aaa5c2; /* ~6.8:1 */
 
   /* Marque */
   --color-brand: #6d5dd3;
   --color-brand-strong: #5a4bc0;
-  --color-brand-glow: #9b8cff; /* violet lumineux pour fonds sombres, ~7:1 */
+  --color-brand-glow: #9b8cff; /* violet lumineux pour fonds sombres, ~5.8:1 */
   --color-brand-soft: rgb(155 140 255 / 0.12);
 
   /* Anciens alias de la palette (conservés pour l'admin et la compatibilité) */
@@ -55,6 +56,21 @@
 
   --animate-float-slow: float-slow 14s ease-in-out infinite;
   --animate-marquee: marquee 40s linear infinite;
+}
+
+/* ==========================================================================
+   AMBIANCE DU FOND (voile des photos, halos)
+   ========================================================================== */
+
+:root {
+  --overlay-rgb: 33 29 55; /* couleur du voile posé sur les photos (= ink) */
+  --overlay-a: 0.48; /* densité en haut de l'écran */
+  --overlay-b: 0.62; /* au milieu */
+  --overlay-c: 0.85; /* en bas */
+  --photo-opacity: 0.55;
+  --glow-1: 129 112 230;
+  --glow-2: 96 88 200;
+  --glow-strength: 0.38;
 }
 
 /* ==========================================================================
