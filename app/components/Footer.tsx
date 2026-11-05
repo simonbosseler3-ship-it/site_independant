@@ -40,7 +40,6 @@ export default function Footer() {
             <nav aria-label="Navigation du pied de page" className="flex flex-col gap-2.5 text-sm font-medium">
               <Link href="/devis" className={linkClass}>Demander un devis</Link>
               <Link href="/contact" className={linkClass}>Contact</Link>
-              <Link href="/mentions-legales" className={linkClass}>Mentions légales</Link>
             </nav>
           </div>
 
@@ -81,12 +80,8 @@ export default function Footer() {
           SIMON BOSSELER
         </div>
 
-        <div className="mt-6 border-t border-line pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-fg-subtle">
+        <div className="mt-6 border-t border-line pt-8 flex justify-center md:justify-start text-sm text-fg-subtle">
           <div>© {currentYear} Simon Bosseler. Tous droits réservés.</div>
-          <div className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-glow animate-pulse motion-reduce:animate-none" aria-hidden="true" />
-            Développé avec passion
-          </div>
         </div>
       </div>
     </footer>

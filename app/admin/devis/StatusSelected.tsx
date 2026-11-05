@@ -19,7 +19,8 @@ export default function StatusSelect({ id, status }: { id: string; status: strin
         name="status"
         defaultValue={status}
         onChange={(e) => e.target.form?.requestSubmit()}
-        className="rounded-full border border-slate-200 px-3 py-1 text-sm bg-white cursor-pointer"
+        aria-label="Statut de la demande"
+        className="rounded-full border border-line-strong bg-paper/[0.06] px-4 py-2 text-sm text-fg cursor-pointer transition-colors hover:border-brand-glow/60 focus:outline-none focus:ring-4 focus:ring-brand/25"
       >
         {Object.entries(statusLabels).map(([value, label]) => (
           <option key={value} value={value}>
