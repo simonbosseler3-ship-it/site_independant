@@ -1,89 +1,140 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import { useBackground } from "@/app/context/BackgroundContext";
 
-const sectionBackgrounds: Record<string, string> = {
-  hero: "/images/workspace.jpg",
-  services: "/images/workspace2.jpg",
-  process: "/images/workspace3.jpg",
-  cta: "/images/workspace4.jpg",
-  profile: "/images/profil.jpg",
-  devis: "/images/devis.jpg",
-  contact: "/images/contact.jpg"
+/**
+ * Fonds photo plein écran qui changent selon la section / la page.
+ *
+ * Performance : les photos d'origine (public/images/*.jpg, jusqu'à 1,3 Mo) ont été
+ * déclinées en WebP 828 / 1440 / 2048 px dans public/images/bg/ (~30 à 110 Ko).
+ * Une image n'est montée dans le DOM qu'au moment où elle devient active, puis reste
+ * en cache : le visiteur ne télécharge que les fonds qu'il voit réellement.
+ * Le fondu ne démarre qu'une fois l'image chargée (pas de flash de fond vide).
+ */
+
+const backgrounds: Record<string, string> = {
+  // Sections / pages
+  hero: "workspace",
+  services: "workspace2",
+  process: "workspace3",
+  cta: "workspace4",
+  profile: "profil",
+  devis: "devis",
+  contact: "contact",
+  // Pages services
+  vitrine: "vitrine",
+  refonte: "refonte",
+  maintenance: "maintenance",
+  landing_page: "landing_page",
+  e_commerce: "e_commerce",
 };
 
-const serviceBackgrounds: Record<string, string> = {
-  "vitrine": "/images/vitrine.jpg",
-  "refonte": "/images/refonte.jpg",
-  "maintenance": "/images/maintenance.jpg",
-  "landing_page": "/images/landing_page.jpg",
-  "e_commerce":"/images/e_commerce.jpg"
-};
+const WIDTHS = [828, 1440, 2048];
 
-const backgrounds: Record<string, string> = { ...sectionBackgrounds, ...serviceBackgrounds };
+function srcSetFor(name: string) {
+  return WIDTHS.map((w) => `/images/bg/${name}-${w}.webp ${w}w`).join(", ");
+}
 
 export default function SiteBackground() {
-  const { activeBg } = useBackground();
+  const { activeBg, ready } = useBackground();
+  const [mounted, setMounted] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState<Set<string>>(() => new Set());
+  const [lastShown, setLastShown] = useState<string | null>(null);
+
+  // Côté client uniquement (le fond réel de la page n'est connu qu'après l'enregistrement
+  // des BackgroundTrigger) : on monte l'image active si elle ne l'est pas encore.
+  const isValid = ready && !!backgrounds[activeBg];
+  if (isValid && !mounted.includes(activeBg)) {
+    setMounted([...mounted, activeBg]);
+  }
+
+  // L'image active n'est affichée qu'une fois chargée ; en attendant, la précédente reste visible.
+  const shown = isValid && loaded.has(activeBg) ? activeBg : lastShown;
+  if (shown !== lastShown) {
+    setLastShown(shown);
+  }
+
+  const handleLoad = (key: string) => {
+    setLoaded((prev) => {
+      if (prev.has(key)) return prev;
+      const next = new Set(prev);
+      next.add(key);
+      return next;
+    });
+  };
 
   return (
-    // transform-gpu force le navigateur mobile à gérer le calque via le processeur graphique
-    <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none transform-gpu">
-      {/* Une couche par image, superposées, fondu géré par transition d'opacité */}
-      {Object.entries(backgrounds).map(([key, src]) => (
-        <Image
+    <div
+      className="fixed inset-0 -z-50 overflow-hidden pointer-events-none bg-ink transform-gpu"
+      aria-hidden="true"
+    >
+      {mounted.map((key) => (
+        // eslint-disable-next-line @next/next/no-img-element -- srcset WebP pré-optimisé (images.unoptimized)
+        <img
           key={key}
-          src={src}
+          src={`/images/bg/${backgrounds[key]}-1440.webp`}
+          srcSet={srcSetFor(backgrounds[key])}
+          sizes="100vw"
           alt=""
-          fill
-          sizes="100vw" // Permet au mobile de ne charger que la taille d'écran adaptée
-          quality={90}
-          // will-change-opacity prévient le GPU pour qu'il anticipe le fondu sans saccade
-          className="object-cover transition-opacity duration-[1200ms] ease-in-out will-change-opacity"
-          style={{ opacity: activeBg === key ? 0.80 : 0 }}
-          priority={key === "hero"}
+          decoding="async"
+          fetchPriority={key === "hero" ? "high" : "auto"}
+          ref={(el) => {
+            // Image déjà complète (cache navigateur) avant l'hydratation de onLoad
+            if (el?.complete && el.naturalWidth > 0) handleLoad(key);
+          }}
+          onLoad={() => handleLoad(key)}
+          className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[opacity]"
+          style={{
+            opacity: shown === key ? 0.5 : 0,
+            transform: shown === key ? "scale(1)" : "scale(1.06)",
+          }}
         />
       ))}
 
-      {/* Voile clair dégradé, dans les teintes du site */}
+      {/* Voile sombre : lisibilité du texte garantie quelle que soit la photo */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(237,233,254,0.60) 0%, rgba(245,243,255,0.50) 22%, rgba(238,242,255,0.40) 45%, rgba(250,245,255,0.20) 68%, rgba(248,250,252,0.10) 100%)",
+            "linear-gradient(180deg, rgba(13,11,20,0.55) 0%, rgba(13,11,20,0.72) 45%, rgba(13,11,20,0.92) 100%)",
         }}
       />
 
-      {/* Texture de points, identité "code" */}
+      {/* Halo violet principal (dégradé radial, pas de filtre blur : léger pour le GPU mobile) */}
       <div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(76,70,224,0.12) 1.5px, transparent 1.5px)",
-          backgroundSize: "26px 26px",
+          background:
+            "radial-gradient(60% 50% at 15% 0%, rgba(109,93,211,0.28) 0%, transparent 70%), radial-gradient(50% 45% at 95% 30%, rgba(76,70,168,0.22) 0%, transparent 70%)",
         }}
       />
 
-      {/* Halos de couleur : masqués sur mobile (hidden md:block) car le blur alourdit trop le scroll tactile */}
-      <div className="hidden md:block absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-violet-400/35 via-purple-300/20 to-transparent blur-[100px]" />
-      <div className="hidden md:block absolute top-10 right-[-200px] w-[750px] h-[750px] rounded-full bg-gradient-to-bl from-indigo-400/30 via-blue-300/15 to-transparent blur-[100px]" />
-      <div className="hidden md:block absolute bottom-[-250px] left-1/3 w-[650px] h-[650px] rounded-full bg-gradient-to-tr from-fuchsia-300/25 via-violet-200/15 to-transparent blur-[100px]" />
+      {/* Trame de points, identité « code » */}
+      <div
+        className="absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_80%)]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(245,244,240,0.09) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
-      {/* Motif "lignes de vitesse" du logo */}
-      <svg className="absolute -bottom-16 -right-16 w-[560px] h-[560px] text-indigo-900/[0.06]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M92 8 L30 92 M92 26 L48 92 M92 44 L66 92" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+      {/* Motif « lignes de vitesse » du logo */}
+      <svg
+        className="absolute -bottom-24 -right-24 w-[620px] h-[620px] text-paper/[0.035]"
+        viewBox="0 0 100 100"
+        fill="none"
+      >
+        <path
+          d="M92 8 L30 92 M92 26 L48 92 M92 44 L66 92"
+          stroke="currentColor"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+        />
       </svg>
 
-      {/* Accent "chevrons de code" */}
-      <svg className="absolute top-20 -right-6 w-72 h-72 text-indigo-900/[0.05]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M35 20 L10 50 L35 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M65 20 L90 50 L65 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-
-      <svg className="absolute bottom-24 -left-10 w-56 h-56 text-violet-900/[0.045] rotate-12" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M35 20 L10 50 L35 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M65 20 L90 50 L65 80" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      {/* Grain photographique */}
+      <div className="absolute inset-0 grain opacity-[0.07] mix-blend-overlay" />
     </div>
   );
 }

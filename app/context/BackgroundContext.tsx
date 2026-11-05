@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback } f
 
 type BackgroundContextType = {
   activeBg: string;
+  /** true une fois le fond réel de la page déterminé (après hydratation). */
+  ready: boolean;
   registerTrigger: (id: string, el: HTMLElement | null) => void;
   setOverrideBg: (id: string | null) => void;
 };
@@ -13,9 +15,11 @@ const BackgroundContext = createContext<BackgroundContextType | null>(null);
 export function BackgroundProvider({ children }: { children: React.ReactNode }) {
   const [scrollBg, setScrollBg] = useState("hero");
   const [overrideBg, setOverrideBg] = useState<string | null>(null);
+  const [ready, setReady] = useState(false);
   const triggersRef = useRef<Map<string, HTMLElement>>(new Map());
   const orderRef = useRef<string[]>([]);
   const tickingRef = useRef(false);
+  const scheduleUpdateRef = useRef<() => void>(() => {});
 
   const registerTrigger = useCallback((id: string, el: HTMLElement | null) => {
     if (el) {
@@ -25,11 +29,14 @@ export function BackgroundProvider({ children }: { children: React.ReactNode }) 
       triggersRef.current.delete(id);
       orderRef.current = orderRef.current.filter((x) => x !== id);
     }
+    // Navigation côté client : on réévalue le fond actif sans attendre un scroll
+    scheduleUpdateRef.current();
   }, []);
 
   useEffect(() => {
     const updateActive = () => {
       tickingRef.current = false;
+      setReady(true);
       const centerY = window.innerHeight * 0.5;
       let current = orderRef.current[0];
       let bestTop = -Infinity;
@@ -56,6 +63,7 @@ export function BackgroundProvider({ children }: { children: React.ReactNode }) 
       }
     };
 
+    scheduleUpdateRef.current = onScroll;
     updateActive();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
@@ -69,7 +77,7 @@ export function BackgroundProvider({ children }: { children: React.ReactNode }) 
   const activeBg = overrideBg ?? scrollBg;
 
   return (
-    <BackgroundContext.Provider value={{ activeBg, registerTrigger, setOverrideBg }}>
+    <BackgroundContext.Provider value={{ activeBg, ready, registerTrigger, setOverrideBg }}>
       {children}
     </BackgroundContext.Provider>
   );

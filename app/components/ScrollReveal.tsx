@@ -1,56 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { m } from "framer-motion";
 
+/**
+ * Révélation douce à l'entrée dans le viewport (une seule fois).
+ * API inchangée par rapport à l'ancienne version (delay en ms, className, style),
+ * mais animation plus sobre : translation + fondu, sans flou ni changement d'échelle.
+ * En mouvement réduit, MotionConfig ne garde que le fondu.
+ */
 export default function ScrollReveal({
   children,
   delay = 0,
   className = "",
   style = {},
+  y = 28,
+  as = "div",
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
   style?: React.CSSProperties;
+  y?: number;
+  as?: "div" | "li" | "section";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const Component = m[as];
 
   return (
-    <div
-      ref={ref}
+    <Component
       className={className}
-      style={{
-        ...style,
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible
-          ? "translateY(0) scale(1)"
-          : "translateY(64px) scale(0.88)",
-        filter: isVisible ? "blur(0px)" : "blur(6px)",
-        transition:
-          "opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease-out",
-        transitionDelay: `${delay}ms`,
-      }}
+      style={style}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: delay / 1000 }}
     >
       {children}
-    </div>
+    </Component>
   );
 }

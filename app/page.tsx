@@ -4,7 +4,7 @@ import ProcessTimeline from "@/app/components/ProcessTimeline";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import ServiceCard from "@/app/components/ServiceCard";
 import BackgroundTrigger from "@/app/components/BackgroundTrigger";
-import { CheckCircle2 } from "lucide-react";
+import Hero from "@/app/components/home/Hero";
 
 export const dynamic = "force-dynamic";
 
@@ -30,95 +30,10 @@ export default async function Home() {
 
   return (
     <main className="relative overflow-hidden">
+      {/* --- SECTION HERO --- */}
+      <Hero />
+
       <div className="max-w-6xl mx-auto px-6 space-y-16 sm:space-y-24 py-12 sm:py-20">
-
-        {/* --- SECTION HERO --- */}
-        <div> 
-          <BackgroundTrigger id="hero" />
-          <section className="flex flex-col items-center text-center pt-8 sm:pt-16 pb-4">
-
-            {/* TITRE PRINCIPAL */}
-            <ScrollReveal delay={100}>
-              <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 max-w-4xl leading-[1.12] drop-shadow-sm">
-                Développez votre activité grâce à une{" "}
-                <span className="bg-gradient-to-r from-violet-600 to-indigo-700 bg-clip-text text-transparent">
-                  présence en ligne professionnelle
-                </span>
-                .
-              </h1>
-            </ScrollReveal>
-
-            {/* TEXTE D'ACCROCHE & VALEURS (Version épurée & élégante) */}
-            <ScrollReveal delay={200}>
-              <div className="mt-8 max-w-3xl mx-auto">
-                <div className="bg-white/75 backdrop-blur-none px-6 sm:px-10 py-8 rounded-3xl border border-white/60 shadow-xl shadow-slate-200/20">
-                  
-                  {/* Message principal */}
-                  <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed mb-8">
-                    Plus qu&apos;un simple prestataire, je me positionne comme votre partenaire technique. En tant que développeur indépendant, je mets un point d&apos;honneur à concevoir des solutions web performantes qui reflètent votre identité, avec une approche rigoureuse issue de mon parcours en ingénierie logicielle.
-                  </p>
-
-                  {/* Les 3 piliers - Version minimaliste et chic sans gros logos */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8 border-t border-slate-200/60 text-left">
-                    
-                    {/* Valeur 1 */}
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-violet-600 font-bold text-sm">
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                        <span>Proximité & Écoute</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
-                        Un interlocuteur unique de la première idée jusqu&apos;à la mise en ligne.
-                      </p>
-                    </div>
-
-                    {/* Valeur 2 */}
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-violet-600 font-bold text-sm">
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                        <span>100% Sur-Mesure</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
-                        Zéro template générique. Des interfaces uniques adaptées à vos besoins.
-                      </p>
-                    </div>
-
-                    {/* Valeur 3 */}
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-violet-600 font-bold text-sm">
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                        <span>Rigueur & Performance</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-6">
-                        Un code propre et optimisé pour garantir rapidité et sécurité.
-                      </p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* BOUTONS D'ACTION */}
-            <ScrollReveal delay={300}>
-              <div className="pt-10 flex flex-wrap justify-center gap-4">
-                <Link 
-                  href="/devis" 
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-base px-8 py-4 rounded-full transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:-translate-y-0.5"
-                >
-                  Lancer mon devis gratuit
-                </Link>
-                <Link 
-                  href="#services" 
-                  className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-base px-8 py-4 rounded-full transition-all shadow-sm hover:border-slate-300"
-                >
-                  Découvrir mes services
-                </Link>
-              </div>
-            </ScrollReveal>
-
-          </section>
-        </div>
 
         {/* --- SECTION SERVICES --- */}
         <div>
