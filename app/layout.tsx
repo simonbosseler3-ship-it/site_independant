@@ -58,6 +58,8 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      // Lenis ajoute ses classes (lenis, lenis-smooth) sur <html> côté client
+      suppressHydrationWarning
       className={`${bricolage.variable} ${instrument.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable}`}
     >
       <body className="text-fg min-h-screen flex flex-col antialiased font-body">

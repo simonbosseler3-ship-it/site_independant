@@ -1,7 +1,7 @@
 export const serviceGraphics: Record<string, React.ReactNode> = {
   vitrine: (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:-translate-x-2 group-hover:rotate-1">
-      <svg className="w-full h-full text-violet-500/10 group-hover:text-violet-500/20 transition-colors duration-500" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-violet-300/[0.24] group-hover:text-violet-300/45 transition-colors duration-500" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="10" y="10" width="180" height="110" rx="12" stroke="currentColor" strokeWidth="6" fill="currentColor" fillOpacity="0.03" />
         <path d="M20 28h160M20 110h160" stroke="currentColor" strokeWidth="4" />
         <circle cx="30" cy="19" r="3" fill="currentColor" />
@@ -19,7 +19,7 @@ export const serviceGraphics: Record<string, React.ReactNode> = {
   ),
   refonte: (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:rotate-3">
-      <svg className="w-full h-full text-indigo-500/10 group-hover:text-indigo-500/20 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-indigo-300/[0.24] group-hover:text-indigo-300/45 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="15" y="25" width="120" height="110" rx="10" stroke="currentColor" strokeWidth="5" strokeDasharray="6 6" fill="none" />
         <rect x="65" y="65" width="120" height="110" rx="10" stroke="currentColor" strokeWidth="6" fill="currentColor" fillOpacity="0.05" />
         <path d="M65 85h120" stroke="currentColor" strokeWidth="4" />
@@ -29,7 +29,7 @@ export const serviceGraphics: Record<string, React.ReactNode> = {
   ),
   "sur-mesure": (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:-rotate-2">
-      <svg className="w-full h-full text-purple-500/10 group-hover:text-purple-500/20 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-purple-300/[0.24] group-hover:text-purple-300/45 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="70" height="70" rx="10" stroke="currentColor" strokeWidth="5" fill="currentColor" fillOpacity="0.05" className="transition-transform duration-500 group-hover:-translate-y-1" />
         <rect x="110" y="20" width="70" height="70" rx="10" stroke="currentColor" strokeWidth="5" fill="currentColor" fillOpacity="0.08" />
         <rect x="20" y="110" width="70" height="70" rx="10" stroke="currentColor" strokeWidth="5" fill="currentColor" fillOpacity="0.08" />
@@ -40,7 +40,7 @@ export const serviceGraphics: Record<string, React.ReactNode> = {
   ),
   maintenance: (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:rotate-6">
-      <svg className="w-full h-full text-fuchsia-500/10 group-hover:text-fuchsia-500/20 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-fuchsia-300/[0.24] group-hover:text-fuchsia-300/45 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="55" stroke="currentColor" strokeWidth="6" fill="currentColor" fillOpacity="0.04" />
         <path d="M100 45v20M100 135v20M155 100h-20M65 100H45M137 63l-14 14M77 123l-14 14M137 137l-14-14M77 77L63 63" stroke="currentColor" strokeWidth="6" strokeLinecap="round" className="transition-transform duration-700 origin-[100px_100px] group-hover:rotate-45" />
         <circle cx="100" cy="100" r="18" fill="currentColor" fillOpacity="0.15" />
@@ -49,7 +49,7 @@ export const serviceGraphics: Record<string, React.ReactNode> = {
   ),
     "e_commerce": (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:translate-x-1 group-hover:-rotate-2">
-      <svg className="w-full h-full text-emerald-500/10 group-hover:text-emerald-500/20 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-emerald-300/[0.24] group-hover:text-emerald-300/45 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="75" cy="165" r="10" fill="currentColor" />
         <circle cx="150" cy="165" r="10" fill="currentColor" />
         <path d="M20 30h25l20 105h110" stroke="currentColor" strokeWidth="6" strokeLinecap="round" fill="none" />
@@ -60,7 +60,7 @@ export const serviceGraphics: Record<string, React.ReactNode> = {
   ),
   "landing_page": (
     <div className="absolute -right-6 -bottom-6 w-52 h-52 pointer-events-none transition-all duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-3 group-hover:rotate-2">
-      <svg className="w-full h-full text-blue-500/10 group-hover:text-blue-500/20 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="w-full h-full text-blue-300/[0.24] group-hover:text-blue-300/45 transition-colors duration-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="160" height="160" rx="14" stroke="currentColor" strokeWidth="5" fill="currentColor" fillOpacity="0.04" />
         <rect x="40" y="45" width="90" height="14" rx="4" fill="currentColor" fillOpacity="0.3" />
         <rect x="40" y="70" width="120" height="8" rx="2" fill="currentColor" fillOpacity="0.15" />
@@ -78,7 +78,7 @@ export const serviceGraphicsAmbient: Record<
   { glow: string; icon: React.ReactNode }
 > = {
   vitrine: {
-    glow: "from-violet-200/60 via-purple-100/30 to-transparent",
+    glow: "from-violet-500/25 via-purple-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20 28h160M20 110h160" stroke="currentColor" strokeWidth="2" />
@@ -96,7 +96,7 @@ export const serviceGraphicsAmbient: Record<
     ),
   },
   refonte: {
-    glow: "from-indigo-200/60 via-blue-100/30 to-transparent",
+    glow: "from-indigo-500/25 via-blue-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="15" y="25" width="120" height="110" rx="10" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" fill="none" />
@@ -107,7 +107,7 @@ export const serviceGraphicsAmbient: Record<
     ),
   },
   "sur-mesure": {
-    glow: "from-purple-200/60 via-fuchsia-100/30 to-transparent",
+    glow: "from-purple-500/25 via-fuchsia-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="70" height="70" rx="10" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.35" />
@@ -119,7 +119,7 @@ export const serviceGraphicsAmbient: Record<
     ),
   },
   maintenance: {
-    glow: "from-fuchsia-200/60 via-pink-100/30 to-transparent",
+    glow: "from-fuchsia-500/25 via-pink-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="55" stroke="currentColor" strokeWidth="2.5" fill="currentColor" fillOpacity="0.2" />
@@ -129,7 +129,7 @@ export const serviceGraphicsAmbient: Record<
     ),
   },
     "e_commerce": {
-    glow: "from-emerald-200/60 via-teal-100/30 to-transparent",
+    glow: "from-emerald-500/25 via-teal-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="75" cy="165" r="10" fill="currentColor" />
@@ -141,7 +141,7 @@ export const serviceGraphicsAmbient: Record<
     ),
   },
   "landing_page": {
-    glow: "from-blue-200/60 via-sky-100/30 to-transparent",
+    glow: "from-blue-500/25 via-sky-500/10 to-transparent",
     icon: (
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="20" y="20" width="160" height="160" rx="14" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
@@ -154,4 +154,14 @@ export const serviceGraphicsAmbient: Record<
       </svg>
     ),
   },
+};
+
+/** Teinte RGB associée à chaque service (halo des cartes, accents des pages détail). */
+export const serviceTints: Record<string, string> = {
+  vitrine: "167,139,250",
+  refonte: "129,140,248",
+  "sur-mesure": "192,132,252",
+  maintenance: "232,121,249",
+  e_commerce: "52,211,153",
+  landing_page: "96,165,250",
 };

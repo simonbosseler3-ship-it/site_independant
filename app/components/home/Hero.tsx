@@ -67,9 +67,9 @@ export default function Hero() {
             </h1>
           </div>
 
-          <div className="relative mt-10 sm:mt-14 grid gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="relative mt-10 sm:mt-14 grid gap-8 xl:grid-cols-12 xl:items-end">
             <p
-              className="animate-rise lg:col-span-7 max-w-2xl text-base sm:text-lg leading-relaxed text-fg-muted"
+              className="animate-rise xl:col-span-7 max-w-2xl text-base sm:text-lg leading-relaxed text-fg-muted"
               style={{ animationDelay: "360ms" }}
             >
               Plus qu&apos;un simple prestataire, je me positionne comme votre partenaire technique. En tant que
@@ -79,7 +79,7 @@ export default function Hero() {
             </p>
 
             <div
-              className="animate-rise lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-3"
+              className="animate-rise xl:col-span-5 flex flex-col sm:flex-row xl:justify-end gap-3"
               style={{ animationDelay: "460ms" }}
             >
               <ButtonLink href="/devis" size="lg" arrow magnetic fullOnMobile>

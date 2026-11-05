@@ -95,7 +95,7 @@ export default function MobileMenu({
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-0 z-[110] md:hidden flex flex-col bg-ink/95 backdrop-blur-xl"
+          className="fixed inset-0 z-[110] lg:hidden flex flex-col bg-ink/95 backdrop-blur-xl"
           initial={{ clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -184,7 +184,7 @@ export default function MobileMenu({
   );
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={triggerRef}
         onClick={() => setOpen(true)}

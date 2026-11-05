@@ -53,7 +53,7 @@ export default function NavbarClient({
           <Logo />
 
           {/* Navigation desktop : pastille animée qui suit le survol / la page active */}
-          <nav aria-label="Navigation principale" className="hidden md:block">
+          <nav aria-label="Navigation principale" className="hidden lg:block">
             <ul className="flex items-center gap-1" onMouseLeave={() => setHovered(null)}>
               {navLinks.map((link) => {
                 const active = isActive(pathname, link.href);
@@ -91,7 +91,7 @@ export default function NavbarClient({
             </ul>
           </nav>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
             {isLoggedIn && (
               <form action={logoutAction}>
                 <button

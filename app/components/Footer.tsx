@@ -13,7 +13,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-24 sm:mt-32 border-t border-line bg-ink/80 backdrop-blur-md overflow-hidden">
+    <footer className="relative mt-12 sm:mt-16 border-t border-line bg-ink/80 backdrop-blur-md overflow-hidden">
       {/* Liseré lumineux en haut du footer */}
       <div
         className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-glow/60 to-transparent"
