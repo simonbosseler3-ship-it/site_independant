@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { m } from "framer-motion";
 import { submitDevis, type DevisFormState } from "./actions";
 import { buttonClasses, ArrowIcon } from "@/app/components/ui/Button";
+import { STARTER_OFFER } from "@/lib/site";
 
 type Service = { slug: string; title: string };
 
@@ -196,6 +197,22 @@ export default function DevisForm({
         </label>
         <input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClass} />
       </div>
+
+      {/* Offre jeunes indépendants */}
+      <label className="relative flex cursor-pointer items-start gap-4 rounded-xl border border-brand-glow/30 bg-brand/10 p-4 sm:p-5 transition-colors hover:bg-brand/15 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-brand-glow/40">
+        <input
+          type="checkbox"
+          name="is_new_independent"
+          value="1"
+          className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-brand"
+        />
+        <span>
+          <span className="block text-sm font-semibold text-fg">{STARTER_OFFER.checkboxLabel}</span>
+          <span className="mt-1 block text-sm text-fg-muted">
+            Activité lancée depuis moins de 2 ans : profitez de prix très avantageux, jusqu&apos;à -40 %.
+          </span>
+        </span>
+      </label>
 
       {state.error && (
         <p

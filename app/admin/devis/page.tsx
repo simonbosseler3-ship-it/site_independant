@@ -26,6 +26,11 @@ export default async function AdminDevisPage() {
                 <p className="mt-1 text-sm text-fg-subtle">
                   {d.project_type} · {d.budget_range} · {d.timeline}
                 </p>
+                {d.is_new_independent && (
+                  <span className="mt-2 inline-block rounded-full border border-brand-glow/30 bg-brand/15 px-3 py-1 text-xs font-medium text-brand-glow">
+                    Indépendant &lt; 2 ans · jusqu&apos;à -40 %
+                  </span>
+                )}
               </div>
               <StatusSelect id={d.id} status={d.status} />
             </div>

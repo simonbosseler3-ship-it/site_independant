@@ -6,6 +6,7 @@ import ServiceBackgroundSetter from "@/app/components/ServiceBackgroundSetter";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import ButtonLink from "@/app/components/ui/Button";
 import { formatServicePrice } from "@/lib/formatPrice";
+import { STARTER_OFFER } from "@/lib/site";
 
 export default async function ServiceDetailPage({
   params,
@@ -40,6 +41,9 @@ export default async function ServiceDetailPage({
       {priceLabel && (
         <p className="relative font-label tabular-nums text-2xl sm:text-3xl font-medium text-fg">{priceLabel}</p>
       )}
+      <span className="relative mt-4 inline-block rounded-full border border-brand-glow/30 bg-brand/15 px-3 py-1.5 text-xs font-medium text-brand-glow">
+        {STARTER_OFFER.badge}
+      </span>
       <ButtonLink
         href={`/devis?type=${service.slug}`}
         size="lg"
@@ -145,6 +149,15 @@ export default async function ServiceDetailPage({
                 </div>
               </ScrollReveal>
             )}
+
+            <ScrollReveal className="mt-6">
+              <div className="flex items-start gap-4 rounded-2xl border border-brand-glow/30 bg-brand/15 backdrop-blur-xl p-6">
+                <svg className="w-5 h-5 text-brand-glow shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a2.25 2.25 0 003.182 0l4.318-4.318a2.25 2.25 0 000-3.182L11.16 3.66A2.25 2.25 0 009.568 3zM6 6h.008v.008H6V6z" />
+                </svg>
+                <p className="text-sm leading-relaxed text-fg">{STARTER_OFFER.text}</p>
+              </div>
+            </ScrollReveal>
 
             {/* CTA mobile / tablette (sur desktop : carte collante à droite) */}
             <div className="mt-10 lg:hidden">{ctaCard}</div>

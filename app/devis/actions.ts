@@ -22,6 +22,7 @@ export async function submitDevis(
   const budget_range = formData.get("budget_range")?.toString();
   const timeline = formData.get("timeline")?.toString();
   const phone = formData.get("phone")?.toString().trim() || null;
+  const is_new_independent = formData.get("is_new_independent") === "1";
 
   if (!name || !email || !description || !project_type) {
     return { success: false, error: "Merci de remplir tous les champs obligatoires." };
@@ -35,6 +36,7 @@ export async function submitDevis(
     description,
     budget_range,
     timeline,
+    is_new_independent,
   });
 
   if (error) {
@@ -56,6 +58,7 @@ export async function submitDevis(
         <p><strong>Type de projet :</strong> ${project_type}</p>
         <p><strong>Budget :</strong> ${budget_range ?? "Non précisé"}</p>
         <p><strong>Délai :</strong> ${timeline ?? "Non précisé"}</p>
+        <p><strong>Indépendant depuis moins de 2 ans :</strong> ${is_new_independent ? "Oui (offre jusqu'à -40 %)" : "Non"}</p>
         <p><strong>Description :</strong></p>
         <p>${description.replace(/\n/g, "<br>")}</p>
       `,

@@ -4,6 +4,7 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 import PageHeader from "@/app/components/ui/PageHeader";
 import SpotlightCard from "@/app/components/ui/SpotlightCard";
 import { formatServicePrice } from "@/lib/formatPrice";
+import { STARTER_OFFER } from "@/lib/site";
 
 export default async function ServicesPage() {
   const { data: services } = await supabase
@@ -44,6 +45,29 @@ export default async function ServicesPage() {
           </>
         }
       />
+
+      {/* Offre jeunes indépendants */}
+      <ScrollReveal className="mb-8 sm:mb-10">
+        <div className="relative overflow-hidden flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 rounded-[2rem] border border-brand-glow/30 bg-brand/15 backdrop-blur-xl p-7 sm:p-9 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <div
+            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full"
+            style={{ background: "radial-gradient(closest-side, rgba(155,140,255,0.35), transparent 75%)" }}
+            aria-hidden="true"
+          />
+          <span
+            className="relative shrink-0 font-display text-5xl sm:text-6xl font-semibold leading-none text-gradient-brand"
+            aria-hidden="true"
+          >
+            -40 %
+          </span>
+          <div className="relative">
+            <h2 className="font-display text-xl sm:text-2xl font-semibold leading-tight text-fg">
+              {STARTER_OFFER.title}
+            </h2>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-fg-muted">{STARTER_OFFER.text}</p>
+          </div>
+        </div>
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {services?.map((service, index) => {
