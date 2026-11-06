@@ -209,7 +209,7 @@ export default function DevisForm({
         <span>
           <span className="block text-sm font-semibold text-fg">{STARTER_OFFER.checkboxLabel}</span>
           <span className="mt-1 block text-sm text-fg-muted">
-            Activité lancée depuis moins de 2 ans : profitez de prix très avantageux, jusqu&apos;à -40 %.
+            Activité lancée depuis moins de 2 ans : profitez de prix très avantageux, jusqu&apos;à -30 %.
           </span>
         </span>
       </label>

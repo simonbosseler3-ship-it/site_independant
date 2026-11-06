@@ -58,7 +58,7 @@ export async function submitDevis(
         <p><strong>Type de projet :</strong> ${project_type}</p>
         <p><strong>Budget :</strong> ${budget_range ?? "Non précisé"}</p>
         <p><strong>Délai :</strong> ${timeline ?? "Non précisé"}</p>
-        <p><strong>Indépendant depuis moins de 2 ans :</strong> ${is_new_independent ? "Oui (offre jusqu'à -40 %)" : "Non"}</p>
+        <p><strong>Indépendant depuis moins de 2 ans :</strong> ${is_new_independent ? "Oui (offre jusqu'à -30 %)" : "Non"}</p>
         <p><strong>Description :</strong></p>
         <p>${description.replace(/\n/g, "<br>")}</p>
       `,

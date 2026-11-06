@@ -58,7 +58,7 @@ export default async function ServicesPage() {
             className="relative shrink-0 font-display text-5xl sm:text-6xl font-semibold leading-none text-gradient-brand"
             aria-hidden="true"
           >
-            -40 %
+            -30 %
           </span>
           <div className="relative">
             <h2 className="font-display text-xl sm:text-2xl font-semibold leading-tight text-fg">
