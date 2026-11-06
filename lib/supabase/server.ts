@@ -13,9 +13,15 @@ export async function createClient() {
           return cookieStore.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          );
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // Appelé depuis un Server Component (ex. Navbar dans RootLayout) :
+            // les cookies y sont en lecture seule. Sans danger, car le middleware
+            // rafraîchit la session et réécrit les cookies à chaque requête.
+          }
         },
       },
     }
